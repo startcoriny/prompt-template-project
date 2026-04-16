@@ -2,7 +2,7 @@ import templates from '../../data/templates.json';
 import type { Template, RenderRequest, RenderResponse } from '../types/template.types';
 import { renderPrompt } from '../utils/renderer';
 
-const templateList = templates as Template[];
+const templateList = templates as unknown as Template[];
 
 export function getAllTemplates(categoryId?: string): Template[] {
   if (categoryId) {

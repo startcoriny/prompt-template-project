@@ -18,6 +18,9 @@ export interface Template {
   description: string;
   promptTemplate: string;
   variables: TemplateVariable[];
+  tags: string[];
+  exampleInput: Record<string, string>;
+  exampleOutput: string;
 }
 
 export interface RenderRequest {

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prompt Template Library</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <header>
+    <h1>Prompt Template Library</h1>
+    <p>상황에 맞는 프롬프트 템플릿을 선택하고, 변수를 입력해 완성된 프롬프트를 생성하세요.</p>
+  </header>
+
+  <main>
+    <!-- 카테고리 -->
+    <section id="category-section">
+      <div id="category-list" class="category-list"></div>
+    </section>
+
+    <!-- 콘텐츠 영역 -->
+    <div id="content-area" class="content-area hidden">
+
+      <!-- 좌측: 템플릿 목록 -->
+      <aside id="template-list-panel">
+        <h2 id="template-list-title">템플릿 목록</h2>
+        <ul id="template-list"></ul>
+      </aside>
+
+      <!-- 우측: 템플릿 상세 + 폼 + 결과 -->
+      <section id="template-detail-panel">
+
+        <!-- 상세 정보 -->
+        <div id="template-info" class="hidden">
+          <h2 id="template-name"></h2>
+          <p id="template-description"></p>
+          <div id="template-tags" class="tag-list"></div>
+
+          <div class="example-box">
+            <div class="example-block">
+              <h4>예시 입력값</h4>
+              <pre id="example-input"></pre>
+            </div>
+            <div class="example-block">
+              <h4>예시 출력</h4>
+              <pre id="example-output"></pre>
+            </div>
+          </div>
+        </div>
+
+        <!-- 변수 입력 폼 -->
+        <div id="form-section" class="hidden">
+          <h3>변수 입력</h3>
+          <form id="variable-form"></form>
+          <div class="form-actions">
+            <button type="button" id="btn-fill-example" class="btn btn-secondary">예시 입력값 채우기</button>
+            <button type="button" id="btn-reset" class="btn btn-ghost">입력값 초기화</button>
+          </div>
+        </div>
+
+        <!-- 프롬프트 생성 -->
+        <div id="result-section" class="hidden">
+          <div class="result-header">
+            <h3>생성된 프롬프트</h3>
+            <button type="button" id="btn-generate" class="btn btn-primary">프롬프트 생성</button>
+          </div>
+          <div id="prompt-output" class="prompt-output hidden">
+            <pre id="prompt-text"></pre>
+            <button type="button" id="btn-copy" class="btn btn-secondary">복사하기</button>
+            <span id="copy-feedback" class="copy-feedback hidden">복사됐습니다!</span>
+          </div>
+        </div>
+
+      </section>
+    </div>
+
+    <!-- 초기 안내 -->
+    <div id="empty-state" class="empty-state">
+      <p>위에서 카테고리를 선택해주세요.</p>
+    </div>
+  </main>
+
+  <script src="/app.js"></script>
+</body>
+</html>
