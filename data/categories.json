@@ -1,0 +1,17 @@
+[
+  {
+    "id": "writing",
+    "name": "글쓰기",
+    "description": "블로그, 이메일, 보고서 등 다양한 글쓰기 템플릿"
+  },
+  {
+    "id": "meeting",
+    "name": "회의",
+    "description": "회의 준비, 회의록, 액션 아이템 정리 템플릿"
+  },
+  {
+    "id": "coding",
+    "name": "코딩",
+    "description": "코드 리뷰, 문서화, 디버깅 지원 템플릿"
+  }
+]
