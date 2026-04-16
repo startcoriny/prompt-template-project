@@ -20,9 +20,9 @@ describe('getAllTemplates', () => {
 
 describe('getTemplateById', () => {
   it('존재하는 id로 템플릿을 반환한다', () => {
-    const result = getTemplateById('writing-blog');
+    const result = getTemplateById('coding-1');
     expect(result).toBeDefined();
-    expect(result?.id).toBe('writing-blog');
+    expect(result?.id).toBe('coding-1');
   });
 
   it('존재하지 않는 id는 undefined를 반환한다', () => {
@@ -33,11 +33,11 @@ describe('getTemplateById', () => {
 
 describe('renderTemplate', () => {
   it('필수 변수를 입력하면 프롬프트를 반환한다', () => {
-    const result = renderTemplate('writing-blog', {
-      variables: { role: '블로거', topic: 'AI 트렌드', tone: '전문적인' },
+    const result = renderTemplate('coding-1', {
+      variables: { language: 'TypeScript', code: 'const x = 1' },
     });
-    expect(result.prompt).toContain('블로거');
-    expect(result.prompt).toContain('AI 트렌드');
+    expect(result.prompt).toContain('TypeScript');
+    expect(result.prompt).toContain('const x = 1');
   });
 
   it('존재하지 않는 템플릿 id 요청 시 에러를 던진다', () => {

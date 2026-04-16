@@ -104,6 +104,34 @@ PR 생성 시 아래 규칙을 따른다.
 
 ---
 
+# 🌿 Git Branch Rules
+
+## Branch Base Rule
+
+- 모든 브랜치는 main에서 생성한다
+- main 브랜치에 직접 커밋하지 않는다
+
+## Branch Naming Rule
+
+- feat/{기능-또는-작업내용}
+- fix/{버그-또는-수정내용}
+- refactor/{구조-개선내용}
+- chore/{기타-작업}
+
+## Rules
+
+- 소문자 + kebab-case 사용
+- 브랜치 이름만 보고 작업 목적을 알 수 있어야 한다
+- 하나의 브랜치는 하나의 작업만 담당한다
+
+## Merge Rule
+
+- 작업 완료 후 PR 초안 생성
+- 사용자 승인 후 main으로 병합
+- squash merge 사용 권장
+
+---
+
 # ⚠️ Safety Rules
 
 - 자동 실행 금지 (항상 사용자 확인 필요)

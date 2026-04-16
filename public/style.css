@@ -1,0 +1,201 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: #f5f5f5;
+  color: #222;
+  min-height: 100vh;
+}
+
+/* 헤더 */
+header {
+  background: #1a1a2e;
+  color: #fff;
+  padding: 24px 32px;
+}
+header h1 { font-size: 1.6rem; margin-bottom: 4px; }
+header p  { font-size: 0.9rem; opacity: 0.7; }
+
+/* 메인 */
+main { max-width: 1200px; margin: 0 auto; padding: 24px 16px; }
+
+/* 카테고리 */
+.category-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+.category-btn {
+  padding: 8px 20px;
+  border: 2px solid #ddd;
+  border-radius: 24px;
+  background: #fff;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.15s;
+}
+.category-btn:hover  { border-color: #4f6ef7; color: #4f6ef7; }
+.category-btn.active { background: #4f6ef7; border-color: #4f6ef7; color: #fff; }
+
+/* 콘텐츠 레이아웃 */
+.content-area {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+/* 템플릿 목록 */
+#template-list-panel {
+  background: #fff;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+#template-list-panel h2 { font-size: 0.85rem; color: #888; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px; }
+#template-list { list-style: none; }
+#template-list li {
+  padding: 10px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background 0.1s;
+}
+#template-list li:hover  { background: #f0f4ff; }
+#template-list li.active { background: #e8eeff; color: #4f6ef7; font-weight: 600; }
+
+/* 상세 패널 */
+#template-detail-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* 템플릿 정보 */
+#template-info {
+  background: #fff;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+#template-name { font-size: 1.3rem; margin-bottom: 8px; }
+#template-description { color: #555; font-size: 0.9rem; margin-bottom: 12px; }
+
+.tag-list { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+.tag {
+  padding: 3px 10px;
+  background: #eef0ff;
+  color: #4f6ef7;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.example-box {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 12px;
+}
+.example-block {
+  background: #f8f9ff;
+  border-radius: 8px;
+  padding: 12px;
+}
+.example-block h4 { font-size: 0.8rem; color: #888; margin-bottom: 8px; }
+.example-block pre {
+  font-size: 0.78rem;
+  white-space: pre-wrap;
+  word-break: break-word;
+  color: #333;
+  line-height: 1.6;
+  max-height: 120px;
+  overflow-y: auto;
+}
+
+/* 폼 */
+#form-section {
+  background: #fff;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+#form-section h3 { font-size: 1rem; margin-bottom: 16px; }
+
+.form-field { margin-bottom: 16px; }
+.form-field label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #333;
+}
+.form-field label .required { color: #e53e3e; margin-left: 2px; }
+.form-field label .optional { color: #aaa; font-weight: 400; font-size: 0.8rem; margin-left: 4px; }
+.form-field input,
+.form-field textarea {
+  width: 100%;
+  padding: 9px 12px;
+  border: 1.5px solid #ddd;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-family: inherit;
+  transition: border-color 0.15s;
+  resize: vertical;
+}
+.form-field input:focus,
+.form-field textarea:focus { outline: none; border-color: #4f6ef7; }
+
+.form-actions { display: flex; gap: 10px; margin-top: 8px; }
+
+/* 결과 */
+#result-section {
+  background: #fff;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+.result-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+.result-header h3 { font-size: 1rem; }
+
+.prompt-output {
+  background: #1a1a2e;
+  border-radius: 8px;
+  padding: 16px;
+  position: relative;
+}
+.prompt-output pre {
+  color: #e0e0f0;
+  font-size: 0.85rem;
+  white-space: pre-wrap;
+  word-break: break-word;
+  line-height: 1.7;
+  margin-bottom: 12px;
+}
+.copy-feedback {
+  font-size: 0.8rem;
+  color: #68d391;
+  margin-left: 10px;
+}
+
+/* 버튼 */
+.btn {
+  padding: 9px 18px;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.15s, transform 0.1s;
+}
+.btn:hover  { opacity: 0.85; }
+.btn:active { transform: scale(0.97); }
+.btn-primary   { background: #4f6ef7; color: #fff; }
+.btn-secondary { background: #eef0ff; color: #4f6ef7; }
+.btn-ghost     { background: transparent; color: #888; border: 1.5px solid #ddd; }
+
+/* 유틸 */
+.hidden { display: none !important; }
+.empty-state { text-align: center; color: #aaa; padding: 60px 0; font-size: 1rem; }

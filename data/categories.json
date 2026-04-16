@@ -1,17 +1,37 @@
 [
   {
-    "id": "writing",
-    "name": "글쓰기",
-    "description": "블로그, 이메일, 보고서 등 다양한 글쓰기 템플릿"
+    "id": "cooking",
+    "name": "요리",
+    "description": "레시피 추천, 식단 계획, 재료 대체 등 요리 관련 프롬프트"
   },
   {
     "id": "meeting",
     "name": "회의",
-    "description": "회의 준비, 회의록, 액션 아이템 정리 템플릿"
+    "description": "회의 아젠다 작성, 회의록 정리, 액션 아이템 도출 프롬프트"
+  },
+  {
+    "id": "study",
+    "name": "공부",
+    "description": "개념 설명, 학습 계획 수립, 퀴즈 생성 등 학습 지원 프롬프트"
+  },
+  {
+    "id": "writing",
+    "name": "글쓰기",
+    "description": "블로그, 이메일, 자기소개서 등 다양한 글쓰기 프롬프트"
   },
   {
     "id": "coding",
     "name": "코딩",
-    "description": "코드 리뷰, 문서화, 디버깅 지원 템플릿"
+    "description": "코드 리뷰, 에러 해결, 기능 구현 요청 등 개발 지원 프롬프트"
+  },
+  {
+    "id": "travel",
+    "name": "여행",
+    "description": "여행 일정 계획, 현지 음식 추천, 준비물 체크리스트 프롬프트"
+  },
+  {
+    "id": "interview",
+    "name": "면접",
+    "description": "예상 질문, 자기소개 준비, 답변 피드백 등 면접 대비 프롬프트"
   }
 ]
