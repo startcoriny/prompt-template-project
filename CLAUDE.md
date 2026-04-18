@@ -80,6 +80,36 @@
 
 ---
 
+# 🔧 GitHub PR 생성 방법
+
+`gh` CLI 없이 Node.js + Octokit으로 PR을 직접 생성한다.
+
+## 실행 방법
+
+```bash
+node -e "
+require('dotenv').config();
+const { Octokit } = require('@octokit/rest');
+const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN });
+
+octokit.pulls.create({
+  owner: 'startcoriny',
+  repo: 'prompt-template-project',
+  title: 'feat: 제목',
+  body: '본문',
+  base: 'main',
+  head: 'feat/브랜치명',
+}).then(res => console.log('PR URL:', res.data.html_url));
+"
+```
+
+## 필요 조건
+
+- `.env`에 `GITHUB_TOKEN`, `GITHUB_REPO` 설정 필요
+- `@octokit/rest` 패키지는 이미 설치되어 있음
+
+---
+
 # 🔀 GitHub PR Rules
 
 PR 생성 시 아래 규칙을 따른다.
