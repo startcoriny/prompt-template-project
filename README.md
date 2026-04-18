@@ -40,7 +40,7 @@ npm run build
 npm start
 ```
 
-서버 기본 포트: `http://localhost:3000`
+서버 기본 포트: `http://localhost:4000` (`.env`의 `PORT` 값에 따라 변경됩니다)
 
 ## 테스트
 
@@ -52,7 +52,7 @@ npm test
 
 ## Web UI
 
-브라우저에서 `http://localhost:3000` 에 접속하면 웹 인터페이스를 사용할 수 있습니다.
+브라우저에서 `http://localhost:4000` 에 접속하면 웹 인터페이스를 사용할 수 있습니다. (`.env`의 `PORT` 값 기준)
 
 **사용 흐름:**
 1. 상단에서 카테고리 선택
