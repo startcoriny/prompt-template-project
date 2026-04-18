@@ -1,6 +1,7 @@
 # Prompt Template Library
 
-상황별 AI 프롬프트 템플릿을 카테고리로 관리하고, 변수를 입력해 완성된 프롬프트를 생성하는 API 서버입니다.
+상황별 AI 프롬프트 템플릿을 카테고리로 관리하고, 변수를 입력해 완성된 프롬프트를 생성하는 서비스입니다.
+브라우저 UI와 REST API를 모두 제공합니다.
 
 ---
 
@@ -41,13 +42,31 @@ npm start
 
 서버 기본 포트: `http://localhost:3000`
 
+## 테스트
+
+```bash
+npm test
+```
+
 ---
 
-## API 예시
+## Web UI
+
+브라우저에서 `http://localhost:3000` 에 접속하면 웹 인터페이스를 사용할 수 있습니다.
+
+**사용 흐름:**
+1. 상단에서 카테고리 선택
+2. 좌측 목록에서 템플릿 선택
+3. 예시 입력값 확인 후 변수 입력
+4. "프롬프트 생성" 버튼 클릭 → 완성된 프롬프트 복사
+
+---
+
+## API
 
 ### 카테고리 목록 조회
 
-```bash
+```
 GET /categories
 ```
 
@@ -62,7 +81,7 @@ GET /categories
 
 ### 템플릿 목록 조회
 
-```bash
+```
 GET /templates
 GET /templates?category=meeting
 ```
@@ -71,7 +90,7 @@ GET /templates?category=meeting
 
 ### 템플릿 단건 조회
 
-```bash
+```
 GET /templates/writing-blog
 ```
 
@@ -79,7 +98,7 @@ GET /templates/writing-blog
 
 ### 프롬프트 생성 (변수 치환)
 
-```bash
+```
 POST /templates/writing-blog/render
 Content-Type: application/json
 
@@ -96,7 +115,7 @@ Content-Type: application/json
 
 ```json
 {
-    "prompt": "당신은 전문 블로거입니다.\n생산성 향상에 대한 블로그 글을 친근하고 실용적인 톤으로 작성해주세요.\n분량은 {{length}} 정도로 작성하고, 독자가 쉽게 이해할 수 있도록 구성해주세요."
+    "prompt": "당신은 전문 블로거입니다.\n생산성 향상에 대한 블로그 글을 친근하고 실용적인 톤으로 작성해주세요."
 }
 ```
 
@@ -106,7 +125,7 @@ Content-Type: application/json
 
 ### 에러 응답 (필수 변수 누락)
 
-```bash
+```
 POST /templates/writing-blog/render
 
 { "variables": {} }
@@ -120,19 +139,81 @@ POST /templates/writing-blog/render
 
 ---
 
+### Notion 작업 로그 기록
+
+```
+POST /logs
+Content-Type: application/json
+
+{
+  "date": "2026-04-18",
+  "summary": "웹 UI 구현",
+  "files": ["public/index.html", "public/style.css"],
+  "changes": "카테고리/템플릿 선택 UI 및 프롬프트 생성 흐름 구현",
+  "features": ["카테고리 필터", "변수 입력 폼", "복사 기능"],
+  "todos": ["다크모드", "즐겨찾기"]
+}
+```
+
+---
+
+### GitHub PR 초안 생성
+
+```
+POST /prs/draft
+Content-Type: application/json
+
+{
+  "title": "feat: 웹 UI 구현",
+  "body": "...",
+  "head": "feat/web-ui",
+  "base": "main"
+}
+```
+
+### GitHub PR 실제 생성
+
+```
+POST /prs
+```
+
+> PR은 항상 초안을 먼저 생성하고, 사용자 승인 후 실제 PR을 생성합니다.
+
+---
+
 ## 프로젝트 구조
 
 ```
 prompt-template-project/
 ├── data/
-│   ├── categories.json
-│   └── templates.json
+│   ├── categories.json       # 카테고리 데이터
+│   └── templates.json        # 템플릿 데이터
+├── public/
+│   ├── index.html            # 웹 UI
+│   ├── style.css             # 스타일
+│   └── app.js                # 프론트엔드 로직
 ├── src/
 │   ├── controllers/
+│   │   ├── category.controller.ts
+│   │   ├── template.controller.ts
+│   │   ├── notion.controller.ts
+│   │   └── github.controller.ts
 │   ├── services/
+│   │   ├── category.service.ts
+│   │   ├── template.service.ts
+│   │   ├── notion.service.ts
+│   │   └── github.service.ts
 │   ├── types/
+│   │   ├── template.types.ts
+│   │   ├── notion.types.ts
+│   │   └── github.types.ts
 │   ├── utils/
+│   │   └── renderer.ts       # 변수 치환 유틸
+│   ├── __tests__/
+│   │   ├── renderer.test.ts
+│   │   └── template.service.test.ts
 │   └── app.ts
+├── jest.config.js
 ├── tsconfig.json
 └── package.json
 ```
@@ -141,3 +222,4 @@ prompt-template-project/
 
 - 변수: `{{variable_name}}`
 - `required: true` 인 변수 누락 시 400 에러 반환
+- optional 변수는 미입력 시 `{{variable_name}}` 그대로 유지

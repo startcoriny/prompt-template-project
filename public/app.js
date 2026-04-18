@@ -62,8 +62,11 @@ function renderTemplateList(templates) {
   templateListEl.innerHTML = '';
   templates.forEach((t) => {
     const li = document.createElement('li');
-    li.textContent = t.name;
     li.dataset.id = t.id;
+    li.innerHTML = `
+      <span class="tpl-name">${t.name}</span>
+      <span class="tpl-desc">${t.description ?? ''}</span>
+    `;
     li.addEventListener('click', () => onTemplateClick(t, li));
     templateListEl.appendChild(li);
   });
@@ -204,14 +207,24 @@ btnGenerate.addEventListener('click', async () => {
   promptText.textContent = result.prompt;
   promptOutput.classList.remove('hidden');
   copyFeedback.classList.add('hidden');
+
+  resultSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  resultSection.classList.add('result-highlight');
+  setTimeout(() => resultSection.classList.remove('result-highlight'), 1000);
 });
 
 btnCopy.addEventListener('click', async () => {
   const text = promptText.textContent;
   if (!text) return;
   await navigator.clipboard.writeText(text);
+  btnCopy.textContent = '복사 완료 ✓';
+  btnCopy.classList.add('btn-copied');
   copyFeedback.classList.remove('hidden');
-  setTimeout(() => copyFeedback.classList.add('hidden'), 2000);
+  setTimeout(() => {
+    btnCopy.textContent = '복사하기';
+    btnCopy.classList.remove('btn-copied');
+    copyFeedback.classList.add('hidden');
+  }, 2000);
 });
 
 // ── 초기 로드 ──────────────────────────────────────
