@@ -1,7 +1,3 @@
-/**
- * promptTemplate 문자열의 {{variable}} 를 실제 값으로 치환한다.
- * required 변수가 누락된 경우 에러를 던진다.
- */
 import type { TemplateVariable } from '../types/template.types';
 
 export function renderPrompt(
@@ -9,15 +5,37 @@ export function renderPrompt(
   variables: TemplateVariable[],
   inputs: Record<string, string>
 ): string {
-  const missingRequired = variables
-    .filter((v) => v.required && !inputs[v.name])
-    .map((v) => v.name);
+  const trimmed = trimInputs(inputs);
+  validateRequiredVariables(variables, trimmed);
+  return substituteVariables(promptTemplate, trimmed);
+}
 
-  if (missingRequired.length > 0) {
-    throw new Error(`필수 변수가 누락되었습니다: ${missingRequired.join(', ')}`);
+function trimInputs(inputs: Record<string, string>): Record<string, string> {
+  return Object.fromEntries(
+    Object.entries(inputs).map(([key, value]) => [key, value.trim()])
+  );
+}
+
+function validateRequiredVariables(
+  variables: TemplateVariable[],
+  trimmed: Record<string, string>
+): void {
+  const missing = variables.filter((v) => v.required && !trimmed[v.name]);
+
+  if (missing.length > 0) {
+    const messages = missing
+      .map((v) => `${v.label}(${v.name})을(를) 입력해주세요`)
+      .join(', ');
+    throw new Error(messages);
   }
+}
 
+// 값이 없거나 빈 문자열이면 {{variable}} 그대로 유지
+function substituteVariables(
+  promptTemplate: string,
+  trimmed: Record<string, string>
+): string {
   return promptTemplate.replace(/\{\{(\w+)\}\}/g, (match, key: string) => {
-    return inputs[key] ?? match;
+    return trimmed[key] || match;
   });
 }
