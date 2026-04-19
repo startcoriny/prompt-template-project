@@ -219,6 +219,67 @@ main { max-width: 1200px; margin: 0 auto; padding: 24px 16px; }
 /* 복사 완료 버튼 */
 .btn-copied { background: #2f855a !important; color: #fff !important; }
 
+/* 알림 배너 */
+.notification {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: 10px;
+  font-size: 0.88rem;
+  font-weight: 500;
+  margin-bottom: 16px;
+  animation: notification-in 0.2s ease-out;
+}
+@keyframes notification-in {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.notification-error {
+  background: #fff5f5;
+  border: 1.5px solid #feb2b2;
+  color: #c53030;
+}
+.notification-success {
+  background: #f0fff4;
+  border: 1.5px solid #9ae6b4;
+  color: #276749;
+}
+.notification-close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.1rem;
+  line-height: 1;
+  color: inherit;
+  opacity: 0.6;
+  padding: 0 4px;
+  flex-shrink: 0;
+}
+.notification-close:hover { opacity: 1; }
+
+/* 필드 에러 */
+.field-error-msg {
+  display: block;
+  font-size: 0.78rem;
+  color: #c53030;
+  margin-top: 4px;
+  min-height: 1em;
+}
+.input-error {
+  border-color: #fc8181 !important;
+  background: #fff5f5;
+}
+.input-error:focus { border-color: #e53e3e !important; outline: none; }
+
+/* 생성 버튼 로딩 */
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
 /* 유틸 */
 .hidden { display: none !important; }
 
