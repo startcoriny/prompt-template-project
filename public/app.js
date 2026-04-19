@@ -1,37 +1,88 @@
 // 상태
 let currentTemplate = null;
+let notificationTimer = null;
 
 // DOM
-const categoryList     = document.getElementById('category-list');
-const contentArea      = document.getElementById('content-area');
-const emptyState       = document.getElementById('empty-state');
-const templateListEl   = document.getElementById('template-list');
-const templateInfo     = document.getElementById('template-info');
-const templateName     = document.getElementById('template-name');
-const templateDesc     = document.getElementById('template-description');
-const templateTags     = document.getElementById('template-tags');
-const exampleInputEl   = document.getElementById('example-input');
-const exampleOutputEl  = document.getElementById('example-output');
-const formSection      = document.getElementById('form-section');
-const variableForm     = document.getElementById('variable-form');
-const resultSection    = document.getElementById('result-section');
-const promptOutput     = document.getElementById('prompt-output');
-const promptText       = document.getElementById('prompt-text');
-const btnFillExample   = document.getElementById('btn-fill-example');
-const btnReset         = document.getElementById('btn-reset');
-const btnGenerate      = document.getElementById('btn-generate');
-const btnCopy          = document.getElementById('btn-copy');
-const copyFeedback     = document.getElementById('copy-feedback');
+const categoryList      = document.getElementById('category-list');
+const contentArea       = document.getElementById('content-area');
+const emptyState        = document.getElementById('empty-state');
+const templateListEl    = document.getElementById('template-list');
+const templateInfo      = document.getElementById('template-info');
+const templateName      = document.getElementById('template-name');
+const templateDesc      = document.getElementById('template-description');
+const templateTags      = document.getElementById('template-tags');
+const exampleInputEl    = document.getElementById('example-input');
+const exampleOutputEl   = document.getElementById('example-output');
+const formSection       = document.getElementById('form-section');
+const variableForm      = document.getElementById('variable-form');
+const resultSection     = document.getElementById('result-section');
+const promptOutput      = document.getElementById('prompt-output');
+const promptText        = document.getElementById('prompt-text');
+const btnFillExample    = document.getElementById('btn-fill-example');
+const btnReset          = document.getElementById('btn-reset');
+const btnGenerate       = document.getElementById('btn-generate');
+const btnCopy           = document.getElementById('btn-copy');
+const copyFeedback      = document.getElementById('copy-feedback');
+const notificationArea  = document.getElementById('notification-area');
+const notificationMsg   = document.getElementById('notification-message');
+const notificationClose = document.getElementById('notification-close');
+
+// ── 알림 ──────────────────────────────────────
+
+function showNotification(message, type = 'error') {
+  clearTimeout(notificationTimer);
+  notificationMsg.textContent = message;
+  notificationArea.className = `notification notification-${type}`;
+  notificationArea.classList.remove('hidden');
+  notificationArea.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+  const delay = type === 'error' ? 6000 : 3000;
+  notificationTimer = setTimeout(hideNotification, delay);
+}
+
+function hideNotification() {
+  notificationArea.classList.add('hidden');
+}
+
+notificationClose.addEventListener('click', hideNotification);
+
+// ── 필드 에러 ──────────────────────────────────────
+
+function clearFieldErrors() {
+  variableForm.querySelectorAll('.field-error-msg').forEach((el) => {
+    el.textContent = '';
+  });
+  variableForm.querySelectorAll('.input-error').forEach((el) => {
+    el.classList.remove('input-error');
+  });
+}
+
+function setFieldError(name, message) {
+  const input = variableForm.querySelector(`[name="${name}"]`);
+  if (!input) return;
+  input.classList.add('input-error');
+  const errEl = input.closest('.form-field')?.querySelector('.field-error-msg');
+  if (errEl) errEl.textContent = message;
+}
+
+// ── 버튼 로딩 상태 ──────────────────────────────────────
+
+function setGenerateLoading(isLoading) {
+  btnGenerate.disabled = isLoading;
+  btnGenerate.textContent = isLoading ? '생성 중...' : '프롬프트 생성';
+}
 
 // ── API 호출 ──────────────────────────────────────
 
 async function fetchCategories() {
   const res = await fetch('/categories');
+  if (!res.ok) throw new Error(`카테고리를 불러오지 못했습니다. (${res.status})`);
   return res.json();
 }
 
 async function fetchTemplates(categoryId) {
   const res = await fetch(`/templates?category=${categoryId}`);
+  if (!res.ok) throw new Error(`템플릿 목록을 불러오지 못했습니다. (${res.status})`);
   return res.json();
 }
 
@@ -41,7 +92,9 @@ async function renderPrompt(templateId, variables) {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ variables }),
   });
-  return res.json();
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.error ?? `서버 오류가 발생했습니다. (${res.status})`);
+  return data;
 }
 
 // ── 렌더링 ──────────────────────────────────────
@@ -73,22 +126,17 @@ function renderTemplateList(templates) {
 }
 
 function renderTemplateDetail(template) {
-  // 기본 정보
   templateName.textContent = template.name;
   templateDesc.textContent = template.description;
 
-  // 태그
   templateTags.innerHTML = template.tags
     .map((tag) => `<span class="tag">${tag}</span>`)
     .join('');
 
-  // 예시 입력값
   const inputLines = Object.entries(template.exampleInput)
     .map(([k, v]) => `${k}: ${v}`)
     .join('\n');
   exampleInputEl.textContent = inputLines;
-
-  // 예시 출력
   exampleOutputEl.textContent = template.exampleOutput;
 
   templateInfo.classList.remove('hidden');
@@ -112,8 +160,19 @@ function renderVariableForm(template) {
       ? Object.assign(document.createElement('textarea'), { rows: 4, name: v.name, placeholder: v.placeholder })
       : Object.assign(document.createElement('input'), { type: 'text', name: v.name, placeholder: v.placeholder });
 
+    // 입력 시 해당 필드 에러 해제
+    input.addEventListener('input', () => {
+      input.classList.remove('input-error');
+      const errEl = field.querySelector('.field-error-msg');
+      if (errEl) errEl.textContent = '';
+    });
+
+    const errMsg = document.createElement('span');
+    errMsg.className = 'field-error-msg';
+
     field.appendChild(label);
     field.appendChild(input);
+    field.appendChild(errMsg);
     variableForm.appendChild(field);
   });
 
@@ -126,28 +185,27 @@ function renderVariableForm(template) {
 // ── 이벤트 핸들러 ──────────────────────────────────────
 
 async function onCategoryClick(categoryId, btn) {
-  // 버튼 활성화
   document.querySelectorAll('.category-btn').forEach((b) => b.classList.remove('active'));
   btn.classList.add('active');
 
-  // 템플릿 목록 불러오기
-  const templates = await fetchTemplates(categoryId);
-  renderTemplateList(templates);
+  try {
+    const templates = await fetchTemplates(categoryId);
+    renderTemplateList(templates);
 
-  // 상세 초기화
-  templateInfo.classList.add('hidden');
-  formSection.classList.add('hidden');
-  resultSection.classList.add('hidden');
-  currentTemplate = null;
+    templateInfo.classList.add('hidden');
+    formSection.classList.add('hidden');
+    resultSection.classList.add('hidden');
+    currentTemplate = null;
 
-  // 레이아웃 전환
-  contentArea.classList.remove('hidden');
-  emptyState.classList.add('hidden');
+    contentArea.classList.remove('hidden');
+    emptyState.classList.add('hidden');
 
-  // 목록 첫 항목 자동 선택
-  if (templates.length > 0) {
-    const firstLi = templateListEl.querySelector('li');
-    onTemplateClick(templates[0], firstLi);
+    if (templates.length > 0) {
+      const firstLi = templateListEl.querySelector('li');
+      onTemplateClick(templates[0], firstLi);
+    }
+  } catch (err) {
+    showNotification(err.message);
   }
 }
 
@@ -158,11 +216,13 @@ function onTemplateClick(template, li) {
   currentTemplate = template;
   renderTemplateDetail(template);
   renderVariableForm(template);
+  hideNotification();
   copyFeedback.classList.add('hidden');
 }
 
 btnFillExample.addEventListener('click', () => {
   if (!currentTemplate) return;
+  clearFieldErrors();
   const inputs = variableForm.querySelectorAll('input, textarea');
   inputs.forEach((input) => {
     const value = currentTemplate.exampleInput[input.name];
@@ -172,64 +232,85 @@ btnFillExample.addEventListener('click', () => {
 
 btnReset.addEventListener('click', () => {
   variableForm.reset();
+  clearFieldErrors();
   promptOutput.classList.add('hidden');
   promptText.textContent = '';
   copyFeedback.classList.add('hidden');
+  hideNotification();
 });
 
 btnGenerate.addEventListener('click', async () => {
   if (!currentTemplate) return;
 
+  clearFieldErrors();
+  hideNotification();
+
   const inputs = variableForm.querySelectorAll('input, textarea');
   const variables = {};
-  let missingRequired = [];
+  const missingFields = [];
 
   inputs.forEach((input) => {
     const variable = currentTemplate.variables.find((v) => v.name === input.name);
-    if (variable?.required && !input.value.trim()) {
-      missingRequired.push(variable.label);
+    const trimmed = input.value.trim();
+    if (variable?.required && !trimmed) {
+      missingFields.push(variable.name);
+      setFieldError(variable.name, `${variable.label}은(는) 필수 입력값입니다.`);
     }
-    variables[input.name] = input.value.trim();
+    variables[input.name] = trimmed;
   });
 
-  if (missingRequired.length > 0) {
-    alert(`필수 입력값을 채워주세요:\n${missingRequired.join(', ')}`);
+  if (missingFields.length > 0) {
+    showNotification('필수 입력값을 모두 채워주세요. 빨간 표시 항목을 확인하세요.');
+    variableForm.querySelector('.input-error')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
     return;
   }
 
-  const result = await renderPrompt(currentTemplate.id, variables);
+  setGenerateLoading(true);
+  try {
+    const result = await renderPrompt(currentTemplate.id, variables);
+    promptText.textContent = result.prompt;
+    promptOutput.classList.remove('hidden');
+    copyFeedback.classList.add('hidden');
 
-  if (result.error) {
-    alert(`오류: ${result.error}`);
-    return;
+    showNotification('프롬프트가 생성됐습니다.', 'success');
+
+    resultSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    resultSection.classList.add('result-highlight');
+    setTimeout(() => resultSection.classList.remove('result-highlight'), 1000);
+  } catch (err) {
+    showNotification(err.message);
+  } finally {
+    setGenerateLoading(false);
   }
-
-  promptText.textContent = result.prompt;
-  promptOutput.classList.remove('hidden');
-  copyFeedback.classList.add('hidden');
-
-  resultSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  resultSection.classList.add('result-highlight');
-  setTimeout(() => resultSection.classList.remove('result-highlight'), 1000);
 });
 
 btnCopy.addEventListener('click', async () => {
   const text = promptText.textContent;
   if (!text) return;
-  await navigator.clipboard.writeText(text);
-  btnCopy.textContent = '복사 완료 ✓';
-  btnCopy.classList.add('btn-copied');
-  copyFeedback.classList.remove('hidden');
-  setTimeout(() => {
-    btnCopy.textContent = '복사하기';
-    btnCopy.classList.remove('btn-copied');
-    copyFeedback.classList.add('hidden');
-  }, 2000);
+
+  try {
+    await navigator.clipboard.writeText(text);
+    btnCopy.textContent = '복사 완료 ✓';
+    btnCopy.classList.add('btn-copied');
+    copyFeedback.classList.remove('hidden');
+    clearTimeout(btnCopy._copyTimer);
+    btnCopy._copyTimer = setTimeout(() => {
+      btnCopy.textContent = '복사하기';
+      btnCopy.classList.remove('btn-copied');
+      copyFeedback.classList.add('hidden');
+    }, 2000);
+  } catch {
+    showNotification('클립보드 복사에 실패했습니다. 텍스트를 직접 선택해 복사해주세요.');
+  }
 });
 
 // ── 초기 로드 ──────────────────────────────────────
 
 (async () => {
-  const categories = await fetchCategories();
-  renderCategories(categories);
+  try {
+    const categories = await fetchCategories();
+    renderCategories(categories);
+  } catch (err) {
+    showNotification(err.message);
+  }
 })();
