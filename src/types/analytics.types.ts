@@ -7,6 +7,7 @@ export interface AnalyticsEvent {
   techniques?: string[];
   patterns?: string[];
   success?: boolean;
+  error?: string;
 }
 
 // 확장 시 이 인터페이스만 구현하면 됨 (CloudWatch, DB 등)
