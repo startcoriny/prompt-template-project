@@ -193,6 +193,24 @@ async function composePrompt(body) {
   return data;
 }
 
+// clipboard API가 없는 HTTP 환경(운영)을 위한 fallback 포함
+async function copyToClipboard(text) {
+  if (navigator.clipboard) {
+    await navigator.clipboard.writeText(text);
+    return;
+  }
+  // HTTP 환경 fallback: textarea 선택 후 execCommand
+  const ta = document.createElement('textarea');
+  ta.value = text;
+  ta.style.cssText = 'position:fixed;top:-9999px;left:-9999px;opacity:0';
+  document.body.appendChild(ta);
+  ta.focus();
+  ta.select();
+  const ok = document.execCommand('copy');
+  document.body.removeChild(ta);
+  if (!ok) throw new Error('execCommand copy failed');
+}
+
 // analytics 실패는 UX에 영향 없도록 fire-and-forget
 function trackEvent(payload) {
   fetch('/analytics/track', {
@@ -347,7 +365,7 @@ btnCopy.addEventListener('click', async () => {
   const text = promptText.textContent;
   if (!text) return;
   try {
-    await navigator.clipboard.writeText(text);
+    await copyToClipboard(text);
     btnCopy.textContent = '복사 완료 ✓';
     btnCopy.classList.add('btn-copied');
     copyFeedback.classList.remove('hidden');
@@ -689,7 +707,7 @@ btnComposeCopy.addEventListener('click', async () => {
   const text = composerPromptText.textContent;
   if (!text) return;
   try {
-    await navigator.clipboard.writeText(text);
+    await copyToClipboard(text);
     const body = buildComposerRequest();
     trackEvent({
       event: 'copy_prompt',

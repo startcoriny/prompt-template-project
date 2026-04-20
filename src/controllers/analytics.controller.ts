@@ -12,6 +12,12 @@ export function trackEventHandler(req: Request, res: Response): void {
       return;
     }
 
+    const errorMsg = typeof error === 'string' ? error : undefined;
+
+    if (errorMsg) {
+      console.error(`[analytics] client error — event=${event} session=${sessionId} error=${errorMsg}`);
+    }
+
     analytics.track({
       event,
       sessionId: typeof sessionId === 'string' ? sessionId : 'unknown',
@@ -20,7 +26,7 @@ export function trackEventHandler(req: Request, res: Response): void {
       techniques,
       patterns,
       success,
-      error: typeof error === 'string' ? error : undefined,
+      error: errorMsg,
     });
   } catch {
     // silently ignore
