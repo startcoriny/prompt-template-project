@@ -5,7 +5,7 @@ import { analytics } from '../services/analytics.service';
 // analytics 실패가 절대 클라이언트 UX를 막으면 안 되므로 항상 204 반환
 export function trackEventHandler(req: Request, res: Response): void {
   try {
-    const { event, sessionId, category, framework, techniques, patterns, success } = req.body;
+    const { event, sessionId, category, framework, techniques, patterns, success, error } = req.body;
 
     if (typeof event !== 'string' || !event) {
       res.status(204).end();
@@ -20,6 +20,7 @@ export function trackEventHandler(req: Request, res: Response): void {
       techniques,
       patterns,
       success,
+      error: typeof error === 'string' ? error : undefined,
     });
   } catch {
     // silently ignore

@@ -357,7 +357,10 @@ btnCopy.addEventListener('click', async () => {
       btnCopy.classList.remove('btn-copied');
       copyFeedback.classList.add('hidden');
     }, 2000);
-  } catch {
+  } catch (err) {
+    const reason = err instanceof Error ? `${err.name}: ${err.message}` : String(err);
+    console.error('[copy] template clipboard failed:', reason);
+    trackEvent({ event: 'copy_error', category: currentTemplate?.category, success: false, error: reason });
     showNotification('클립보드 복사에 실패했습니다. 텍스트를 직접 선택해 복사해주세요.');
   }
 });
@@ -704,7 +707,11 @@ btnComposeCopy.addEventListener('click', async () => {
       btnComposeCopy.classList.remove('btn-copied');
       composerCopyFeedback.classList.add('hidden');
     }, 2000);
-  } catch {
+  } catch (err) {
+    const reason = err instanceof Error ? `${err.name}: ${err.message}` : String(err);
+    console.error('[copy] composer clipboard failed:', reason);
+    const body = buildComposerRequest();
+    trackEvent({ event: 'copy_error', category: composerCategoryId, framework: body.frameworkId, success: false, error: reason });
     showNotification('클립보드 복사에 실패했습니다. 텍스트를 직접 선택해 복사해주세요.');
   }
 });
