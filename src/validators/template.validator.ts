@@ -17,6 +17,9 @@ const TemplateSchema = z.object({
   tags: z.array(z.string()),
   exampleInput: z.record(z.string(), z.string()),
   exampleOutput: z.string(),
+  framework: z.string().optional(),
+  techniques: z.array(z.string()).optional(),
+  patterns: z.array(z.string()).optional(),
 });
 
 export const TemplateListSchema = z.array(TemplateSchema);

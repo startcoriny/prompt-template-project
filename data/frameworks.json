@@ -1,0 +1,52 @@
+[
+  {
+    "id": "5w1h",
+    "name": "5W1H",
+    "description": "Who/What/When/Where/Why/How 6가지 관점으로 완전하게 분석",
+    "effect": "분석 누락 없이 전체 그림을 파악할 수 있음",
+    "promptFragment": "다음 5W1H 구조로 분석해주세요:\n- Who (누가 / 누구에게)\n- What (무엇을)\n- When (언제)\n- Where (어디서)\n- Why (왜, 근본 원인 포함)\n- How (어떻게)",
+    "applicableCategories": ["study", "meeting", "travel", "writing"],
+    "incompatibleWith": [],
+    "extraVariables": [
+      { "name": "who",   "label": "누가 (Who)",    "placeholder": "관련 인물 또는 조직" },
+      { "name": "what",  "label": "무엇을 (What)",  "placeholder": "핵심 사안 또는 목적" },
+      { "name": "when",  "label": "언제 (When)",    "placeholder": "시점 또는 기간" },
+      { "name": "where", "label": "어디서 (Where)", "placeholder": "장소 또는 맥락" },
+      { "name": "why",   "label": "왜 (Why)",       "placeholder": "목적 또는 근본 이유" },
+      { "name": "how",   "label": "어떻게 (How)",   "placeholder": "방법 또는 수단" }
+    ]
+  },
+  {
+    "id": "mece",
+    "name": "MECE",
+    "description": "Mutually Exclusive Collectively Exhaustive — 중복 없이 누락 없이 분류",
+    "effect": "중복 작업과 사각지대를 동시에 제거할 수 있음",
+    "promptFragment": "MECE 원칙(상호 배타적 & 전체 포괄적)으로 구조화해주세요:\n1. 중복되지 않는 핵심 카테고리로 분류\n2. 누락된 영역이 없는지 검토\n3. 각 카테고리가 독립적인지 확인",
+    "applicableCategories": ["meeting", "writing", "coding"],
+    "incompatibleWith": []
+  },
+  {
+    "id": "star",
+    "name": "STAR",
+    "description": "Situation-Task-Action-Result — 경험을 임팩트 있게 구조화",
+    "effect": "경험이 설득력 있는 근거로 전달됨",
+    "promptFragment": "STAR 구조로 작성해주세요:\n- Situation: 구체적 상황과 맥락\n- Task: 맡은 역할과 목표\n- Action: 주도적으로 취한 행동\n- Result: 측정 가능한 결과와 학습",
+    "applicableCategories": ["interview", "writing"],
+    "incompatibleWith": ["mece"],
+    "extraVariables": [
+      { "name": "situation", "label": "상황 (Situation)", "placeholder": "배경이 된 구체적 상황" },
+      { "name": "task",      "label": "과제 (Task)",      "placeholder": "본인이 맡은 역할과 목표" },
+      { "name": "action",    "label": "행동 (Action)",    "placeholder": "주도적으로 취한 행동" },
+      { "name": "result",    "label": "결과 (Result)",    "placeholder": "측정 가능한 성과나 학습" }
+    ]
+  },
+  {
+    "id": "aida",
+    "name": "AIDA",
+    "description": "Attention-Interest-Desire-Action — 독자를 행동으로 이끄는 설득 구조",
+    "effect": "독자가 마지막까지 읽고 행동하게 됨",
+    "promptFragment": "AIDA 구조로 작성해주세요:\n- Attention: 즉각적으로 시선을 끄는 문장\n- Interest: 문제 공감과 해결 가능성 암시\n- Desire: 구체적 혜택과 차별점\n- Action: 명확하고 강한 CTA",
+    "applicableCategories": ["writing"],
+    "incompatibleWith": ["star", "mece"]
+  }
+]

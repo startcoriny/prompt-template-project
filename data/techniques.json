@@ -1,0 +1,26 @@
+[
+  {
+    "id": "multi-perspective",
+    "name": "다중 관점",
+    "description": "하나의 문제를 여러 입장에서 동시에 바라봄",
+    "effect": "한쪽으로 치우친 결론을 방지하고 균형 잡힌 인사이트를 얻음",
+    "promptFragment": "다음 다중 관점을 모두 적용해 분석해주세요:\n- 초보자/비전문가 관점\n- 전문가/실무자 관점\n- 비판적 회의론자 관점\n각 관점에서 발견되는 인사이트를 별도로 작성해주세요.",
+    "applicableCategories": ["study", "meeting", "coding", "writing", "travel"]
+  },
+  {
+    "id": "concept-mapping",
+    "name": "개념 매핑",
+    "description": "핵심 개념과 연관 개념의 관계를 명시적으로 시각화",
+    "effect": "개념 간 관계가 명확해져 학습 효율이 높아짐",
+    "promptFragment": "개념 매핑 방식으로 구조화해주세요:\n1. 핵심 개념을 중앙에 놓고\n2. 직접 연결된 1차 개념들을 연결 관계와 함께 나열\n3. 각 1차 개념에서 파생되는 2차 개념 추가\n4. 개념 간 공통점/대비 관계 명시",
+    "applicableCategories": ["study", "coding"]
+  },
+  {
+    "id": "role-assignment",
+    "name": "역할 부여",
+    "description": "서로 다른 전문가 역할을 부여해 다각도 검토",
+    "effect": "각 전문가 시각의 강점을 동시에 활용할 수 있음",
+    "promptFragment": "다음 세 전문가 역할을 각각 수행해주세요:\n- [전문가 A]: 기술적/논리적 관점\n- [전문가 B]: 사용자/비즈니스 관점\n- [전문가 C]: 비판적/리스크 관점\n각 역할의 이름을 헤더로 명시하고 독립적으로 작성해주세요.",
+    "applicableCategories": ["study", "coding", "meeting", "writing"]
+  }
+]

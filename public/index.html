@@ -24,7 +24,13 @@
       <div id="category-list" class="category-list"></div>
     </section>
 
-    <!-- 콘텐츠 영역 -->
+    <!-- 모드 탭 -->
+    <div class="mode-tabs" id="mode-tabs">
+      <button class="mode-tab active" data-mode="template">완성형 템플릿</button>
+      <button class="mode-tab" data-mode="composer">조합형 프롬프트</button>
+    </div>
+
+    <!-- ── 완성형 모드 ─────────────────────────────── -->
     <div id="content-area" class="content-area hidden">
 
       <!-- 좌측: 템플릿 목록 -->
@@ -36,12 +42,10 @@
       <!-- 우측: 템플릿 상세 + 폼 + 결과 -->
       <section id="template-detail-panel">
 
-        <!-- 상세 정보 -->
         <div id="template-info" class="hidden">
           <h2 id="template-name"></h2>
           <p id="template-description"></p>
           <div id="template-tags" class="tag-list"></div>
-
           <div class="example-box">
             <div class="example-block">
               <h4>예시 입력값</h4>
@@ -54,7 +58,6 @@
           </div>
         </div>
 
-        <!-- 변수 입력 폼 -->
         <div id="form-section" class="hidden">
           <h3>변수 입력</h3>
           <form id="variable-form"></form>
@@ -64,7 +67,6 @@
           </div>
         </div>
 
-        <!-- 프롬프트 생성 -->
         <div id="result-section" class="hidden">
           <div class="result-header">
             <h3>생성된 프롬프트</h3>
@@ -80,6 +82,80 @@
       </section>
     </div>
 
+    <!-- ── 조합형 모드 ─────────────────────────────── -->
+    <div id="composer-panel" class="composer-panel hidden">
+
+      <!-- 조합 구성 -->
+      <div class="card">
+        <div class="card-header">
+          <h3>조합 구성</h3>
+          <span class="card-hint">카테고리 선택 시 권장 항목이 자동 설정됩니다</span>
+        </div>
+        <div class="combinator-grid">
+
+          <div class="combinator-col">
+            <span class="combinator-label">프레임워크</span>
+            <select id="composer-framework" class="composer-select">
+              <option value="">선택 안함</option>
+            </select>
+            <p id="composer-framework-desc" class="combinator-desc"></p>
+          </div>
+
+          <div class="combinator-col">
+            <span class="combinator-label">기법 <em class="multi-hint">다중 선택</em></span>
+            <div id="composer-techniques" class="chip-group">
+              <p class="chip-placeholder">카테고리를 선택하세요</p>
+            </div>
+          </div>
+
+          <div class="combinator-col">
+            <span class="combinator-label">패턴 <em class="multi-hint">다중 선택</em></span>
+            <div id="composer-patterns" class="chip-group">
+              <p class="chip-placeholder">카테고리를 선택하세요</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- 유효성 검사 결과 -->
+      <div id="composer-validation" class="composer-validation hidden"></div>
+
+      <!-- 프레임워크 추가 입력값 -->
+      <div id="composer-framework-vars" class="card hidden">
+        <div class="card-header">
+          <h3>프레임워크 추가 입력값 <span class="optional-badge">선택</span></h3>
+          <span class="card-hint">입력한 항목만 프롬프트에 반영됩니다</span>
+        </div>
+        <form id="composer-framework-var-form"></form>
+      </div>
+
+      <!-- 변수 입력 -->
+      <div id="composer-form-section" class="card hidden">
+        <h3>기본 입력값</h3>
+        <form id="composer-variable-form"></form>
+      </div>
+
+      <!-- 미리보기 + 생성 -->
+      <div id="composer-result-section" class="card hidden">
+        <div class="result-header">
+          <h3>프롬프트 미리보기</h3>
+          <button type="button" id="btn-compose" class="btn btn-primary" disabled>프롬프트 생성</button>
+        </div>
+        <div id="composer-preview-area">
+          <p id="composer-hint" class="preview-hint">카테고리를 선택하면 미리보기가 표시됩니다.</p>
+          <div id="composer-prompt-output" class="prompt-output hidden">
+            <pre id="composer-prompt-text"></pre>
+            <div class="composer-actions">
+              <button type="button" id="btn-compose-copy" class="btn btn-secondary">복사하기</button>
+              <span id="composer-copy-feedback" class="copy-feedback hidden">복사됐습니다!</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
     <!-- 초기 안내 -->
     <div id="empty-state" class="empty-state">
       <p class="empty-state-title">사용 방법</p>
@@ -91,8 +167,8 @@
         </div>
         <div class="guide-card">
           <span class="guide-step">2</span>
-          <strong>템플릿 선택</strong>
-          <p>목록에서 상황에 맞는 템플릿을 고르세요.</p>
+          <strong>모드 선택</strong>
+          <p>완성형 또는 조합형 프롬프트 모드를 고르세요.</p>
         </div>
         <div class="guide-card">
           <span class="guide-step">3</span>
