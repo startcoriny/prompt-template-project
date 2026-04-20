@@ -1,0 +1,86 @@
+[
+  {
+    "categoryId": "study",
+    "baseRole": "당신은 학습 전문가입니다.",
+    "baseInstruction": "아래 학습 요청에 답변해주세요.\n\n학습 주제: {{topic}}\n현재 수준: {{level}}",
+    "baseVariables": [
+      { "name": "topic", "label": "학습 주제", "placeholder": "예: 비동기 프로그래밍", "required": true },
+      { "name": "level", "label": "현재 수준", "placeholder": "예: 기초 완료", "required": false }
+    ],
+    "recommendedFrameworks": ["5w1h", "mece"],
+    "recommendedTechniques": ["concept-mapping", "multi-perspective"],
+    "recommendedPatterns": ["gamification", "checklist"]
+  },
+  {
+    "categoryId": "meeting",
+    "baseRole": "당신은 전문 퍼실리테이터입니다.",
+    "baseInstruction": "아래 회의 상황을 처리해주세요.\n\n회의 목적: {{purpose}}\n참석자: {{attendees}}",
+    "baseVariables": [
+      { "name": "purpose", "label": "회의 목적", "placeholder": "예: 분기 전략 수립", "required": true },
+      { "name": "attendees", "label": "참석자", "placeholder": "예: 개발팀 4명", "required": false }
+    ],
+    "recommendedFrameworks": ["5w1h", "mece"],
+    "recommendedTechniques": ["multi-perspective", "role-assignment"],
+    "recommendedPatterns": ["checklist"]
+  },
+  {
+    "categoryId": "coding",
+    "baseRole": "당신은 시니어 소프트웨어 엔지니어입니다.",
+    "baseInstruction": "아래 개발 요청을 처리해주세요.\n\n요청 내용: {{request}}\n기술 스택: {{stack}}",
+    "baseVariables": [
+      { "name": "request", "label": "요청 내용", "placeholder": "예: 인증 미들웨어 설계", "required": true },
+      { "name": "stack", "label": "기술 스택", "placeholder": "예: TypeScript, Express", "required": false }
+    ],
+    "recommendedFrameworks": ["mece"],
+    "recommendedTechniques": ["multi-perspective", "role-assignment", "concept-mapping"],
+    "recommendedPatterns": ["checklist", "meta-prompt"]
+  },
+  {
+    "categoryId": "writing",
+    "baseRole": "당신은 전문 작가입니다.",
+    "baseInstruction": "아래 글쓰기 요청을 처리해주세요.\n\n주제: {{topic}}\n대상 독자: {{audience}}",
+    "baseVariables": [
+      { "name": "topic", "label": "주제", "placeholder": "예: 스타트업 개발 문화", "required": true },
+      { "name": "audience", "label": "대상 독자", "placeholder": "예: 주니어 개발자", "required": false }
+    ],
+    "recommendedFrameworks": ["aida", "mece"],
+    "recommendedTechniques": ["multi-perspective", "role-assignment"],
+    "recommendedPatterns": ["checklist", "meta-prompt"]
+  },
+  {
+    "categoryId": "interview",
+    "baseRole": "당신은 면접 전문 코치입니다.",
+    "baseInstruction": "아래 면접 준비 요청을 처리해주세요.\n\n지원 직무: {{position}}\n경력: {{experience}}",
+    "baseVariables": [
+      { "name": "position", "label": "지원 직무", "placeholder": "예: 백엔드 개발자", "required": true },
+      { "name": "experience", "label": "경력", "placeholder": "예: 3년차", "required": false }
+    ],
+    "recommendedFrameworks": ["star"],
+    "recommendedTechniques": ["role-assignment"],
+    "recommendedPatterns": ["gamification"]
+  },
+  {
+    "categoryId": "travel",
+    "baseRole": "당신은 전문 여행 플래너입니다.",
+    "baseInstruction": "아래 여행 요청을 처리해주세요.\n\n여행지: {{destination}}\n여행 기간: {{duration}}",
+    "baseVariables": [
+      { "name": "destination", "label": "여행지", "placeholder": "예: 일본 도쿄", "required": true },
+      { "name": "duration", "label": "여행 기간", "placeholder": "예: 4박 5일", "required": false }
+    ],
+    "recommendedFrameworks": ["5w1h"],
+    "recommendedTechniques": ["multi-perspective"],
+    "recommendedPatterns": ["checklist"]
+  },
+  {
+    "categoryId": "cooking",
+    "baseRole": "당신은 전문 요리사입니다.",
+    "baseInstruction": "아래 요리 요청을 처리해주세요.\n\n요청 내용: {{request}}\n보유 재료: {{ingredients}}",
+    "baseVariables": [
+      { "name": "request", "label": "요청 내용", "placeholder": "예: 간단한 저녁 메뉴 추천", "required": true },
+      { "name": "ingredients", "label": "보유 재료", "placeholder": "예: 계란, 양파, 간장", "required": false }
+    ],
+    "recommendedFrameworks": ["5w1h"],
+    "recommendedTechniques": ["multi-perspective"],
+    "recommendedPatterns": ["checklist"]
+  }
+]

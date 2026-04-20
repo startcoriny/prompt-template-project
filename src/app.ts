@@ -8,8 +8,17 @@ import {
   getTemplateByIdHandler,
   renderTemplateHandler,
 } from './controllers/template.controller';
+import { trackEventHandler } from './controllers/analytics.controller';
 import { postWorkLog } from './controllers/notion.controller';
 import { getPrDraft, submitPr } from './controllers/github.controller';
+import {
+  composePromptHandler,
+  validateCombinationHandler,
+  getFrameworksHandler,
+  getTechniquesHandler,
+  getPatternsHandler,
+  getCategoryConfigHandler,
+} from './controllers/composer.controller';
 
 const app = express();
 const PORT = process.env['PORT'] ?? 3000;
@@ -39,6 +48,18 @@ app.get('/categories', getCategories);
 app.get('/templates', getTemplates);
 app.get('/templates/:id', getTemplateByIdHandler);
 app.post('/templates/:id/render', renderTemplateHandler);
+
+// Composer — data endpoints
+app.get('/composer/frameworks', getFrameworksHandler);
+app.get('/composer/techniques', getTechniquesHandler);
+app.get('/composer/patterns', getPatternsHandler);
+app.get('/composer/config/:categoryId', getCategoryConfigHandler);
+// Composer — compose endpoints
+app.post('/compose', composePromptHandler);
+app.post('/compose/validate', validateCombinationHandler);
+
+// Analytics
+app.post('/analytics/track', trackEventHandler);
 
 // Notion Work Log
 app.post('/logs', postWorkLog);

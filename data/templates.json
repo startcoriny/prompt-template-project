@@ -740,5 +740,391 @@
       "position": "백엔드 개발자"
     },
     "exampleOutput": "당신은 면접 전문 코치입니다.\n\n다음 면접 답변을 평가하고 개선해주세요.\n\n면접 질문: 본인의 단점과 극복 방법을 말해주세요.\n내 답변: 저는 완벽주의 성향이 있어서 일이 늦어지는 경우가 있습니다. 이를 극복하기 위해 노력하고 있습니다.\n지원 직무: 백엔드 개발자\n\n다음 항목으로 피드백해주세요:\n1. 답변 강점 (잘한 점)\n2. 개선이 필요한 부분 (구체적으로)\n3. 개선된 답변 예시\n4. 면접관에게 좋은 인상을 줄 수 있는 추가 포인트"
+  },
+  {
+    "id": "meeting-4",
+    "categoryId": "meeting",
+    "name": "MECE 문제 구조화",
+    "description": "MECE 프레임워크로 문제를 중복 없이, 누락 없이 체계적으로 분류합니다.",
+    "framework": "MECE",
+    "patterns": ["체크리스트"],
+    "promptTemplate": "당신은 McKinsey 출신 전략 컨설턴트입니다.\n\nMECE(Mutually Exclusive, Collectively Exhaustive) 원칙으로 아래 문제를 구조화해주세요.\n\n- 해결할 문제: {{problem}}\n- 분석 목적: {{objective}}\n\n다음 순서로 분석해주세요:\n1. MECE 기준으로 분류한 핵심 카테고리 (3~5개)\n2. 각 카테고리의 세부 항목 (2~3개씩)\n3. 중복 항목 점검 체크리스트\n4. 누락 영역 점검 체크리스트\n5. 우선순위가 높은 영역과 그 근거",
+    "variables": [
+      {
+        "name": "problem",
+        "label": "해결할 문제",
+        "placeholder": "예: 신규 서비스 사용자 이탈률이 높다",
+        "required": true
+      },
+      {
+        "name": "objective",
+        "label": "분석 목적",
+        "placeholder": "예: 이탈 원인 파악 및 개선 방향 도출",
+        "required": true
+      }
+    ],
+    "tags": ["MECE", "구조화", "문제분석", "컨설팅"],
+    "exampleInput": {
+      "problem": "신규 서비스 사용자 이탈률이 높다",
+      "objective": "이탈 원인 파악 및 개선 방향 도출"
+    },
+    "exampleOutput": "당신은 McKinsey 출신 전략 컨설턴트입니다.\n\nMECE 원칙으로 아래 문제를 구조화해주세요.\n\n- 해결할 문제: 신규 서비스 사용자 이탈률이 높다\n- 분석 목적: 이탈 원인 파악 및 개선 방향 도출\n\n다음 순서로 분석해주세요:\n1. MECE 기준으로 분류한 핵심 카테고리 (3~5개)\n2. 각 카테고리의 세부 항목 (2~3개씩)\n3. 중복 항목 점검 체크리스트\n4. 누락 영역 점검 체크리스트\n5. 우선순위가 높은 영역과 그 근거"
+  },
+  {
+    "id": "meeting-5",
+    "categoryId": "meeting",
+    "name": "5W1H 이슈 심층 분석",
+    "description": "5W1H 프레임워크로 이슈의 본질을 빠짐없이 파악합니다.",
+    "framework": "5W1H",
+    "promptTemplate": "당신은 전문 비즈니스 분석가입니다.\n\n5W1H 프레임워크를 활용해 아래 이슈를 심층 분석해주세요.\n\n이슈: {{issue}}\n\n각 항목을 구체적으로 작성해주세요:\n- Who (누가): 관련된 주요 이해관계자\n- What (무엇을): 이슈의 핵심 내용\n- When (언제): 발생 시점과 타임라인\n- Where (어디서): 이슈가 발생하는 맥락/채널\n- Why (왜): 근본 원인 (최소 3가지)\n- How (어떻게): 권장 대응 방안\n\n마지막으로 분석 결과를 한 문장으로 요약해주세요.",
+    "variables": [
+      {
+        "name": "issue",
+        "label": "분석할 이슈",
+        "placeholder": "예: 고객 문의 응답 시간이 평균 48시간을 초과하고 있다",
+        "required": true
+      }
+    ],
+    "tags": ["5W1H", "이슈분석", "원인파악", "회의"],
+    "exampleInput": {
+      "issue": "고객 문의 응답 시간이 평균 48시간을 초과하고 있다"
+    },
+    "exampleOutput": "당신은 전문 비즈니스 분석가입니다.\n\n5W1H 프레임워크를 활용해 아래 이슈를 심층 분석해주세요.\n\n이슈: 고객 문의 응답 시간이 평균 48시간을 초과하고 있다\n\n각 항목을 구체적으로 작성해주세요:\n- Who (누가): 관련된 주요 이해관계자\n- What (무엇을): 이슈의 핵심 내용\n- When (언제): 발생 시점과 타임라인\n- Where (어디서): 이슈가 발생하는 맥락/채널\n- Why (왜): 근본 원인 (최소 3가지)\n- How (어떻게): 권장 대응 방안\n\n마지막으로 분석 결과를 한 문장으로 요약해주세요."
+  },
+  {
+    "id": "interview-4",
+    "categoryId": "interview",
+    "name": "STAR 답변 구성기",
+    "description": "경험을 STAR 구조로 정리해 임팩트 있는 면접 답변을 만듭니다.",
+    "framework": "STAR",
+    "promptTemplate": "당신은 경력직 면접 전문 코치입니다.\n\n아래 경험을 STAR 기법으로 재구성해 면접 답변을 만들어주세요.\n\n- 관련 면접 질문: {{question}}\n- 경험한 상황: {{situation}}\n- 맡은 역할/과제: {{task}}\n- 취한 행동: {{action}}\n- 결과: {{result}}\n\nSTAR 구조로 답변을 작성해주세요:\n- Situation (상황): 2~3문장, 구체적 맥락 제시\n- Task (과제): 1~2문장, 내 역할과 목표 명확화\n- Action (행동): 3~4문장, 내가 주도적으로 한 일 중심\n- Result (결과): 2~3문장, 수치나 구체적 성과 포함\n\n전체 답변은 자연스러운 구어체로 연결해주세요.",
+    "variables": [
+      {
+        "name": "question",
+        "label": "면접 질문",
+        "placeholder": "예: 팀 내 갈등을 해결한 경험을 말해주세요.",
+        "required": true
+      },
+      {
+        "name": "situation",
+        "label": "상황",
+        "placeholder": "예: 출시 2주 전 팀원 간 기능 우선순위 충돌 발생",
+        "required": true
+      },
+      {
+        "name": "task",
+        "label": "역할/과제",
+        "placeholder": "예: PM으로서 합의점을 도출하고 일정을 지켜야 했음",
+        "required": true
+      },
+      {
+        "name": "action",
+        "label": "취한 행동",
+        "placeholder": "예: 각자 입장 청취 후 데이터 기반 우선순위 매트릭스 제시",
+        "required": true
+      },
+      {
+        "name": "result",
+        "label": "결과",
+        "placeholder": "예: 예정일 3일 내 출시, 팀 만족도 조사 4.5/5",
+        "required": true
+      }
+    ],
+    "tags": ["STAR", "면접", "답변구성", "경험기술"],
+    "exampleInput": {
+      "question": "팀 내 갈등을 해결한 경험을 말해주세요.",
+      "situation": "출시 2주 전 팀원 간 기능 우선순위 충돌 발생",
+      "task": "PM으로서 합의점을 도출하고 일정을 지켜야 했음",
+      "action": "각자 입장 청취 후 데이터 기반 우선순위 매트릭스 제시",
+      "result": "예정일 3일 내 출시, 팀 만족도 조사 4.5/5"
+    },
+    "exampleOutput": "당신은 경력직 면접 전문 코치입니다.\n\n아래 경험을 STAR 기법으로 재구성해 면접 답변을 만들어주세요.\n\n- 관련 면접 질문: 팀 내 갈등을 해결한 경험을 말해주세요.\n- 경험한 상황: 출시 2주 전 팀원 간 기능 우선순위 충돌 발생\n- 맡은 역할/과제: PM으로서 합의점을 도출하고 일정을 지켜야 했음\n- 취한 행동: 각자 입장 청취 후 데이터 기반 우선순위 매트릭스 제시\n- 결과: 예정일 3일 내 출시, 팀 만족도 조사 4.5/5"
+  },
+  {
+    "id": "writing-4",
+    "categoryId": "writing",
+    "name": "AIDA 마케팅 카피 작성",
+    "description": "AIDA 프레임워크로 독자를 행동으로 이끄는 마케팅 카피를 작성합니다.",
+    "framework": "AIDA",
+    "promptTemplate": "당신은 퍼포먼스 마케팅 전문 카피라이터입니다.\n\nAIDA(Attention-Interest-Desire-Action) 프레임워크로 아래 제품/서비스의 마케팅 카피를 작성해주세요.\n\n- 제품/서비스: {{product}}\n- 핵심 가치: {{value}}\n- 타깃 고객: {{target}}\n- 채널: {{channel}}\n\nAIDA 구조로 각각 작성해주세요:\n- Attention (주목): 첫 문장에서 강렬하게 시선 끌기\n- Interest (흥미): 문제 공감 + 해결책 암시\n- Desire (욕구): 구체적 혜택과 차별점 제시\n- Action (행동): 명확한 CTA 문장\n\n전체 분량은 {{channel}}에 최적화된 길이로 작성해주세요.",
+    "variables": [
+      {
+        "name": "product",
+        "label": "제품/서비스명",
+        "placeholder": "예: AI 기반 일정 관리 앱 'TimeMate'",
+        "required": true
+      },
+      {
+        "name": "value",
+        "label": "핵심 가치",
+        "placeholder": "예: 회의 일정을 자동으로 최적화해 하루 1시간 절약",
+        "required": true
+      },
+      {
+        "name": "target",
+        "label": "타깃 고객",
+        "placeholder": "예: 회의가 많은 30대 직장인",
+        "required": true
+      },
+      {
+        "name": "channel",
+        "label": "마케팅 채널",
+        "placeholder": "예: 인스타그램 피드 광고",
+        "required": false
+      }
+    ],
+    "tags": ["AIDA", "카피라이팅", "마케팅", "광고"],
+    "exampleInput": {
+      "product": "AI 기반 일정 관리 앱 TimeMate",
+      "value": "회의 일정을 자동으로 최적화해 하루 1시간 절약",
+      "target": "회의가 많은 30대 직장인",
+      "channel": "인스타그램 피드 광고"
+    },
+    "exampleOutput": "당신은 퍼포먼스 마케팅 전문 카피라이터입니다.\n\nAIDA 프레임워크로 아래 제품/서비스의 마케팅 카피를 작성해주세요.\n\n- 제품/서비스: AI 기반 일정 관리 앱 TimeMate\n- 핵심 가치: 회의 일정을 자동으로 최적화해 하루 1시간 절약\n- 타깃 고객: 회의가 많은 30대 직장인\n- 채널: 인스타그램 피드 광고"
+  },
+  {
+    "id": "writing-5",
+    "categoryId": "writing",
+    "name": "메타 프롬프트 생성기",
+    "description": "원하는 목적에 맞는 고품질 AI 프롬프트를 설계해줍니다.",
+    "patterns": ["메타 프롬프트"],
+    "promptTemplate": "당신은 AI 프롬프트 엔지니어링 전문가입니다.\n\n아래 요구사항을 분석해 최적의 AI 프롬프트를 설계해주세요.\n\n- 달성하려는 목표: {{goal}}\n- 사용할 AI 모델: {{model}}\n- 출력 형식: {{output_format}}\n- 피해야 할 것: {{avoid}}\n\n다음을 포함한 완성된 프롬프트를 작성해주세요:\n1. 역할 설정 (Role)\n2. 맥락 제공 (Context)\n3. 명확한 지시사항 (Instructions)\n4. 출력 형식 명세 (Format)\n5. 예시 (Example, 선택)\n\n작성 후 이 프롬프트가 효과적인 이유를 3가지 설명해주세요.",
+    "variables": [
+      {
+        "name": "goal",
+        "label": "달성 목표",
+        "placeholder": "예: 기술 블로그 포스팅 초안 자동 생성",
+        "required": true
+      },
+      {
+        "name": "model",
+        "label": "AI 모델",
+        "placeholder": "예: Claude, GPT-4",
+        "required": false
+      },
+      {
+        "name": "output_format",
+        "label": "출력 형식",
+        "placeholder": "예: 마크다운, JSON, 번호 목록",
+        "required": true
+      },
+      {
+        "name": "avoid",
+        "label": "피해야 할 것",
+        "placeholder": "예: 지나치게 기술적인 용어, 영어 혼용",
+        "required": false
+      }
+    ],
+    "tags": ["메타프롬프트", "프롬프트엔지니어링", "AI활용"],
+    "exampleInput": {
+      "goal": "기술 블로그 포스팅 초안 자동 생성",
+      "model": "Claude",
+      "output_format": "마크다운",
+      "avoid": "지나치게 기술적인 용어, 영어 혼용"
+    },
+    "exampleOutput": "당신은 AI 프롬프트 엔지니어링 전문가입니다.\n\n아래 요구사항을 분석해 최적의 AI 프롬프트를 설계해주세요.\n\n- 달성하려는 목표: 기술 블로그 포스팅 초안 자동 생성\n- 사용할 AI 모델: Claude\n- 출력 형식: 마크다운\n- 피해야 할 것: 지나치게 기술적인 용어, 영어 혼용"
+  },
+  {
+    "id": "writing-6",
+    "categoryId": "writing",
+    "name": "체크리스트 기반 문서 검토",
+    "description": "작성한 문서를 체크리스트로 빠짐없이 검토하고 개선점을 도출합니다.",
+    "patterns": ["체크리스트"],
+    "promptTemplate": "당신은 전문 테크니컬 라이터입니다.\n\n아래 문서를 체크리스트 기반으로 검토하고 개선안을 제시해주세요.\n\n- 문서 유형: {{doc_type}}\n- 대상 독자: {{audience}}\n- 문서 내용: {{content}}\n\n다음 체크리스트 항목별로 평가해주세요 (충족/미충족/개선 필요):\n□ 목적과 범위가 명확히 정의되어 있는가\n□ 독자 수준에 맞는 용어를 사용했는가\n□ 논리적 흐름이 자연스러운가\n□ 구체적인 예시나 근거가 포함되어 있는가\n□ 행동 가능한 결론 또는 다음 단계가 있는가\n□ 불필요한 반복이나 장황한 표현이 없는가\n\n각 미충족/개선 항목에 구체적인 수정 제안을 작성해주세요.",
+    "variables": [
+      {
+        "name": "doc_type",
+        "label": "문서 유형",
+        "placeholder": "예: 기획서, 제안서, 기술 문서",
+        "required": true
+      },
+      {
+        "name": "audience",
+        "label": "대상 독자",
+        "placeholder": "예: 비개발자 임원진",
+        "required": true
+      },
+      {
+        "name": "content",
+        "label": "검토할 문서 내용",
+        "placeholder": "문서 내용을 붙여넣으세요",
+        "required": true
+      }
+    ],
+    "tags": ["체크리스트", "문서검토", "글쓰기품질"],
+    "exampleInput": {
+      "doc_type": "기획서",
+      "audience": "비개발자 임원진",
+      "content": "신규 추천 시스템 도입 계획. 협업 필터링 알고리즘을 적용하여 CTR 향상을 도모한다."
+    },
+    "exampleOutput": "당신은 전문 테크니컬 라이터입니다.\n\n아래 문서를 체크리스트 기반으로 검토하고 개선안을 제시해주세요.\n\n- 문서 유형: 기획서\n- 대상 독자: 비개발자 임원진\n- 문서 내용: 신규 추천 시스템 도입 계획. 협업 필터링 알고리즘을 적용하여 CTR 향상을 도모한다."
+  },
+  {
+    "id": "study-4",
+    "categoryId": "study",
+    "name": "개념 매핑 학습법",
+    "description": "개념 간 관계를 시각적으로 매핑해 심층 이해를 돕습니다.",
+    "techniques": ["개념 매핑"],
+    "promptTemplate": "당신은 인지 학습 전문가입니다.\n\n아래 핵심 개념을 중심으로 개념 맵을 텍스트로 작성해주세요.\n\n- 핵심 개념: {{core_concept}}\n- 학습 맥락: {{context}}\n- 이미 아는 것: {{prior_knowledge}}\n\n다음 형식으로 개념 맵을 구성해주세요:\n1. 핵심 개념 정의 (1~2문장)\n2. 직접 연결된 하위 개념 (3~5개) + 각 연결 관계 설명\n3. 각 하위 개념에서 파생되는 연관 개념 (2~3개씩)\n4. 개념들 간 공통점 또는 대비 관계\n5. 이 개념 맵을 활용한 학습 질문 3가지",
+    "variables": [
+      {
+        "name": "core_concept",
+        "label": "핵심 개념",
+        "placeholder": "예: 비동기 프로그래밍",
+        "required": true
+      },
+      {
+        "name": "context",
+        "label": "학습 맥락",
+        "placeholder": "예: Node.js 백엔드 개발",
+        "required": true
+      },
+      {
+        "name": "prior_knowledge",
+        "label": "이미 아는 것",
+        "placeholder": "예: 동기 함수 호출, 콜백 기초",
+        "required": false
+      }
+    ],
+    "tags": ["개념매핑", "학습법", "심층이해"],
+    "exampleInput": {
+      "core_concept": "비동기 프로그래밍",
+      "context": "Node.js 백엔드 개발",
+      "prior_knowledge": "동기 함수 호출, 콜백 기초"
+    },
+    "exampleOutput": "당신은 인지 학습 전문가입니다.\n\n아래 핵심 개념을 중심으로 개념 맵을 텍스트로 작성해주세요.\n\n- 핵심 개념: 비동기 프로그래밍\n- 학습 맥락: Node.js 백엔드 개발\n- 이미 아는 것: 동기 함수 호출, 콜백 기초"
+  },
+  {
+    "id": "study-5",
+    "categoryId": "study",
+    "name": "게임화 학습 챌린지",
+    "description": "게임화 요소를 적용해 지루한 학습을 흥미로운 도전 과제로 바꿉니다.",
+    "patterns": ["게임화"],
+    "promptTemplate": "당신은 게임 기반 학습 설계 전문가입니다.\n\n아래 학습 주제를 게임화 방식으로 재설계해주세요.\n\n- 학습 주제: {{subject}}\n- 학습자 수준: {{level}}\n- 학습 기간: {{duration}}\n\n다음 요소를 포함한 게임화 학습 플랜을 작성해주세요:\n1. 미션 시스템: 단계별 미션 5개 (난이도 점진 상승)\n2. 경험치(XP) 설계: 각 미션 달성 시 획득 XP와 의미\n3. 배지/업적: 특정 조건 달성 시 획득 가능한 배지 3개\n4. 보스전: 학습 마무리를 위한 종합 도전 과제 1개\n5. 체크포인트: 진도 확인 방법\n\n학습자가 \"다음 단계가 궁금해지는\" 구조로 만들어주세요.",
+    "variables": [
+      {
+        "name": "subject",
+        "label": "학습 주제",
+        "placeholder": "예: SQL 기초",
+        "required": true
+      },
+      {
+        "name": "level",
+        "label": "학습자 수준",
+        "placeholder": "예: 프로그래밍 경험 없는 입문자",
+        "required": true
+      },
+      {
+        "name": "duration",
+        "label": "학습 기간",
+        "placeholder": "예: 2주",
+        "required": false
+      }
+    ],
+    "tags": ["게임화", "학습설계", "동기부여"],
+    "exampleInput": {
+      "subject": "SQL 기초",
+      "level": "프로그래밍 경험 없는 입문자",
+      "duration": "2주"
+    },
+    "exampleOutput": "당신은 게임 기반 학습 설계 전문가입니다.\n\n아래 학습 주제를 게임화 방식으로 재설계해주세요.\n\n- 학습 주제: SQL 기초\n- 학습자 수준: 프로그래밍 경험 없는 입문자\n- 학습 기간: 2주"
+  },
+  {
+    "id": "coding-4",
+    "categoryId": "coding",
+    "name": "다중 관점 시스템 설계",
+    "description": "여러 이해관계자 관점에서 시스템 설계의 트레이드오프를 분석합니다.",
+    "techniques": ["다중 관점"],
+    "promptTemplate": "당신은 시니어 소프트웨어 아키텍트입니다.\n\n아래 시스템을 다중 관점으로 설계하고 트레이드오프를 분석해주세요.\n\n- 구현할 시스템: {{system}}\n- 예상 규모: {{scale}}\n- 주요 제약: {{constraints}}\n\n다음 관점별로 분석해주세요:\n1. 개발자 관점: 구현 복잡도, 유지보수성\n2. 운영자 관점: 배포 용이성, 모니터링 가능성\n3. 비즈니스 관점: 개발 비용, 시장 출시 속도\n4. 사용자 관점: 성능, 안정성 영향\n5. 보안 관점: 잠재적 취약점\n\n각 관점에서 추천 아키텍처 패턴과 그 이유를 작성하고, 최종 권장안을 제시해주세요.",
+    "variables": [
+      {
+        "name": "system",
+        "label": "구현할 시스템",
+        "placeholder": "예: 실시간 알림 시스템",
+        "required": true
+      },
+      {
+        "name": "scale",
+        "label": "예상 규모",
+        "placeholder": "예: DAU 10만명, 분당 알림 5만건",
+        "required": true
+      },
+      {
+        "name": "constraints",
+        "label": "주요 제약",
+        "placeholder": "예: 개발 기간 3개월, 팀 규모 4명",
+        "required": false
+      }
+    ],
+    "tags": ["다중관점", "시스템설계", "아키텍처", "트레이드오프"],
+    "exampleInput": {
+      "system": "실시간 알림 시스템",
+      "scale": "DAU 10만명, 분당 알림 5만건",
+      "constraints": "개발 기간 3개월, 팀 규모 4명"
+    },
+    "exampleOutput": "당신은 시니어 소프트웨어 아키텍트입니다.\n\n아래 시스템을 다중 관점으로 설계하고 트레이드오프를 분석해주세요.\n\n- 구현할 시스템: 실시간 알림 시스템\n- 예상 규모: DAU 10만명, 분당 알림 5만건\n- 주요 제약: 개발 기간 3개월, 팀 규모 4명"
+  },
+  {
+    "id": "coding-5",
+    "categoryId": "coding",
+    "name": "역할 부여 기반 코드 리뷰",
+    "description": "서로 다른 전문가 역할을 부여해 코드를 다각도로 검토합니다.",
+    "techniques": ["역할 부여"],
+    "promptTemplate": "아래 코드를 세 명의 전문가가 각자의 역할로 리뷰합니다.\n\n```{{language}}\n{{code}}\n```\n\n각 전문가의 관점에서 리뷰를 작성해주세요:\n\n**보안 전문가 Alex**의 리뷰:\n- 보안 취약점 및 위험 요소\n- 개선 우선순위 (Critical / High / Medium)\n\n**성능 엔지니어 Sam**의 리뷰:\n- 병목 지점 및 최적화 기회\n- 예상 성능 개선 수치\n\n**클린코드 전도사 Jordan**의 리뷰:\n- 가독성 및 유지보수성 문제\n- 리팩토링 제안 코드\n\n마지막으로 세 전문가가 합의한 최우선 개선 항목 Top 3를 정리해주세요.",
+    "variables": [
+      {
+        "name": "language",
+        "label": "프로그래밍 언어",
+        "placeholder": "예: Python",
+        "required": true
+      },
+      {
+        "name": "code",
+        "label": "리뷰할 코드",
+        "placeholder": "코드를 붙여넣으세요",
+        "required": true
+      }
+    ],
+    "tags": ["역할부여", "코드리뷰", "다각도분석"],
+    "exampleInput": {
+      "language": "Python",
+      "code": "def get_user(user_id):\n    query = f'SELECT * FROM users WHERE id = {user_id}'\n    return db.execute(query)"
+    },
+    "exampleOutput": "아래 코드를 세 명의 전문가가 각자의 역할로 리뷰합니다.\n\n```Python\ndef get_user(user_id):\n    query = f'SELECT * FROM users WHERE id = {user_id}'\n    return db.execute(query)\n```"
+  },
+  {
+    "id": "travel-4",
+    "categoryId": "travel",
+    "name": "5W1H 여행지 사전 조사",
+    "description": "5W1H 구조로 여행지를 체계적으로 조사해 준비를 완벽하게 합니다.",
+    "framework": "5W1H",
+    "promptTemplate": "당신은 전문 여행 리서처입니다.\n\n5W1H 프레임워크로 아래 여행지를 조사해주세요.\n\n- 여행지: {{destination}}\n- 여행 시기: {{period}}\n- 여행 목적: {{purpose}}\n\n각 항목을 구체적으로 작성해주세요:\n- Who (누가 가면 좋은가): 추천 여행자 유형\n- What (무엇을 봐야 하는가): 핵심 명소 Top 5\n- When (언제 가야 하는가): 최적 시기와 피해야 할 시기\n- Where (어디에 머물어야 하는가): 지역별 특성과 숙박 추천 구역\n- Why (왜 이 여행지인가): 이 여행지만의 독특한 매력\n- How (어떻게 이동하는가): 주요 교통수단과 이동 팁\n\n마지막으로 {{period}} 여행 시 특별 주의사항을 알려주세요.",
+    "variables": [
+      {
+        "name": "destination",
+        "label": "여행지",
+        "placeholder": "예: 포르투갈 리스본",
+        "required": true
+      },
+      {
+        "name": "period",
+        "label": "여행 시기",
+        "placeholder": "예: 2025년 6월",
+        "required": true
+      },
+      {
+        "name": "purpose",
+        "label": "여행 목적",
+        "placeholder": "예: 문화 탐방 + 휴식",
+        "required": false
+      }
+    ],
+    "tags": ["5W1H", "여행조사", "여행준비", "사전리서치"],
+    "exampleInput": {
+      "destination": "포르투갈 리스본",
+      "period": "2025년 6월",
+      "purpose": "문화 탐방 + 휴식"
+    },
+    "exampleOutput": "당신은 전문 여행 리서처입니다.\n\n5W1H 프레임워크로 아래 여행지를 조사해주세요.\n\n- 여행지: 포르투갈 리스본\n- 여행 시기: 2025년 6월\n- 여행 목적: 문화 탐방 + 휴식"
   }
 ]
